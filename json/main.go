@@ -3,18 +3,25 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
+	"os"
 )
+
+
 
 func main() {
 	data := readFile("data.json")
-	fmt.Printf("%s", data)
-	var storedJson map[string](interface{})
+	
+	//fmt.Printf("%s", data)
+	var storedJson interface{}
 	json.Unmarshal([]byte(data), &storedJson)
-	fmt.Println(storedJson)
-	json, err := json.MarshalIndent(storedJson, "", "  ")
-	if err != nil {
-		log.Fatal(err)
+	//fmt.Printf("%s", storedJson)
+	searchResult, err := dfsKey(storedJson, "longitude")
+	if err != nil{
+		fmt.Println(err)
+		os.Exit(1)
 	}
-	fmt.Println(string(json))
+	fmt.Println(searchResult)
+
+	
+
 }
