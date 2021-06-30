@@ -44,16 +44,30 @@ func dfsValue(item interface{}, searchValue string) (bool, errors){
 		for _, val:= range item.([]interface{}){
 			if val.(string) == searchValue{
 				return true, nil
-			}else if iType:=reflect.TypeOf(val); iType.Kind() == reflect.Map {
-				dfsValue(val, searchValue)
+			}else {
+				_, err := dfsKey(val, searchValue)
+				if err == nil{
+					return true, err
+				}
+			}
+		}
+		return false, errors.New("can't find value")
+
+	case reflect.Map:
+		for _, val := range item.(map[string]interface{}){
+			if val.(string) == searchValue{
+				return true, nil
+			}else{
+				_, err := dfsValue(val, searchValue)
+				if err == nil{
+					return true, err
+				}
 			}
 		}
 
-	case reflect.Map:
-
 
 	default:
-		return "", errors.New("can't find the key")
+		return false, errors.New("can't find the value")
 	}
 }
 

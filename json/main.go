@@ -17,11 +17,14 @@ func main() {
 	//fmt.Printf("%s", storedJson)
 	searchResult, err := dfsKey(storedJson, "longitude")
 	if err != nil{
-		fmt.Println(err)
 		os.Exit(1)
 	}
 	fmt.Println(searchResult)
 
-	
+	searchResult, err = dfsValue(storedJson,"BITREX")
+	if err != nil{
+		os.Exit(1)
+	}
+	fmt.Println(searchResult)
 
 }
