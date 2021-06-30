@@ -8,6 +8,7 @@ import (
 
 func main() {
 	data := readFile("data.json")
+	fmt.Printf("%s", data)
 	var storedJson map[string](interface{})
 	json.Unmarshal([]byte(data), &storedJson)
 	fmt.Println(storedJson)
