@@ -33,7 +33,7 @@ func main() {
 	root.Left.Right = NewNode(5)
 	root.Right.Left = NewNode(6)
 	root.Right.Right = NewNode(7)
-	searchNumber:= 5
+	searchNumber:= 3
 
 	// ============== WITHOUT GOROUTINES
 

@@ -53,11 +53,11 @@ func (n *Node) ProcessNode(searchNumber int) (int) {
 	
 	var hello []int
 	
-	for i := 0; i < 5000; i++ {
+	for i := 0; i < 1000; i++ {
 		time.Sleep(n.Sleep)
 		hello = append(hello, i)
 	}
-	
+
 	fmt.Printf("Node %v ✅\n", n.Data)
 	return n.Data.(int)
 }
@@ -82,7 +82,7 @@ func (n *Node) ProcessNodeParallel(searchNumber int) (int) {
 	}
 	
 	var hello []int
-	for i := 0; i < 5000; i++ {
+	for i := 0; i < 1000; i++ {
 		time.Sleep(n.Sleep)
 		hello = append(hello, i)
 	}
@@ -93,15 +93,12 @@ func (n *Node) ProcessNodeParallel(searchNumber int) (int) {
 // DFS normal DFS function
 func (n *Node) DFS(searchNumber int) {
 
-	if n == nil {
+	if _, ok:= found.found[searchNumber]; n == nil || ok{
 		return
 	}
 
 	n.Left.DFS(searchNumber)
-	ans := n.ProcessNode(searchNumber)
-	if ans == 0{
-		return
-	}
+	n.ProcessNode(searchNumber)
 	n.Right.DFS(searchNumber)
 
 }
@@ -112,10 +109,10 @@ func (n *Node) DFSParallel(searchNumber int) {
 	// Removes goroutine from WaitGroup when function is returning
 	defer wg.Done()
 
-	if n == nil {
+	if _, ok:= found.found[searchNumber]; n == nil || ok{
 		return
 	}
-
+	
 	// Adds a goroutine for left child DFS
 	wg.Add(1)
 	go n.Left.DFSParallel(searchNumber)
