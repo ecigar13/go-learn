@@ -39,12 +39,6 @@ func NewNode(data interface{}) *Node {
 
 // ProcessNode node processing function for normal DFS
 func (n *Node) ProcessNode(searchNumber int) (int) {
-	var hello []int
-	
-	for i := 0; i < 5000; i++ {
-		time.Sleep(n.Sleep)
-		hello = append(hello, i)
-	}
 	
 	if _, ok:= found.found[searchNumber]; ok{
 		fmt.Println("skip", n.Data)
@@ -56,7 +50,14 @@ func (n *Node) ProcessNode(searchNumber int) (int) {
 		fmt.Println("found", searchNumber)
 		return searchNumber
 	}
-
+	
+	var hello []int
+	
+	for i := 0; i < 5000; i++ {
+		time.Sleep(n.Sleep)
+		hello = append(hello, i)
+	}
+	
 	fmt.Printf("Node %v ✅\n", n.Data)
 	return n.Data.(int)
 }
@@ -66,17 +67,12 @@ func (n *Node) ProcessNodeParallel(searchNumber int) (int) {
 
 	defer wg.Done()
 
-	var hello []int
-	for i := 0; i < 5000; i++ {
-		time.Sleep(n.Sleep)
-		hello = append(hello, i)
-	}
-
+	
 	if _, ok:= found.found[searchNumber]; ok{
 		fmt.Println("skip", n.Data)
 		return 0
 	}
-
+	
 	if n.Data.(int) == searchNumber{
 		found.mu.Lock()
 		defer found.mu.Unlock()
@@ -84,7 +80,12 @@ func (n *Node) ProcessNodeParallel(searchNumber int) (int) {
 		fmt.Println("found", searchNumber)
 		return searchNumber
 	}
-
+	
+	var hello []int
+	for i := 0; i < 5000; i++ {
+		time.Sleep(n.Sleep)
+		hello = append(hello, i)
+	}
 	fmt.Printf("Node %v ✅\n", n.Data)
 	return n.Data.(int)
 }
